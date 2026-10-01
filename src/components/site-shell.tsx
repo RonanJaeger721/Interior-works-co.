@@ -1,13 +1,13 @@
 "use client";
-import Image from "next/image";import Link from "next/link";import {useEffect,useState} from "react";import {whatsapp} from "@/lib/site-data";
+import Image from "next/image";import Link from "next/link";import {useEffect,useState} from "react";import {usePathname} from "next/navigation";import {whatsapp} from "@/lib/site-data";
 const nav=[["Home","/"],["Services","/services"],["Projects","/projects"],["Furniture","/furniture"],["About","/about"],["Contact","/contact"]];
 export function SiteShell({children}:{children:React.ReactNode}){
- const[open,setOpen]=useState(false);const[scrolled,setScrolled]=useState(false);
+ const[open,setOpen]=useState(false);const[scrolled,setScrolled]=useState(false);const pathname=usePathname();
  useEffect(()=>{const f=()=>setScrolled(scrollY>24);f();addEventListener("scroll",f,{passive:true});return()=>removeEventListener("scroll",f)},[]);
  return <><div className="loader" aria-hidden="true"><Image src="/brand/interior-works-logo.png" alt="" width={150} height={130}/><i/></div>
  <header className={scrolled?"site-header scrolled":"site-header"}><Link href="/" className="brand" aria-label="Interior Works Co. home"><Image src="/brand/interior-works-logo.png" alt="Interior Works Co." width={118} height={96} priority/></Link><nav>{nav.map(([n,h])=><Link key={h} href={h}>{n}</Link>)}</nav><Link className="header-cta" href="/contact">Book a consultation</Link><button className="menu-button" onClick={()=>setOpen(!open)} aria-expanded={open} aria-label="Open navigation"><span/><span/></button></header>
  <div className={open?"mobile-menu open":"mobile-menu"}>{nav.map(([n,h],i)=><Link key={h} onClick={()=>setOpen(false)} href={h}><small>0{i+1}</small>{n}</Link>)}<a href={whatsapp}>WhatsApp · +263 77 815 3441</a></div>
- <main>{children}</main><InspirationStrip/><FinalCTA/><Footer/><a className="whatsapp" href={whatsapp} target="_blank" aria-label="Chat with Interior Works Co. on WhatsApp">WA</a></>}
+ <main>{children}</main>{(pathname==="/services"||pathname==="/services/kitchens"||pathname==="/services/bic-cupboards"||pathname==="/services/ceilings")&&<InspirationStrip/>}<FinalCTA/><Footer/><a className="whatsapp" href={whatsapp} target="_blank" aria-label="Chat with Interior Works Co. on WhatsApp">WA</a></>}
 function InspirationStrip(){const refs=[
  ["/inspiration/warm-kitchen-reference.jpg","Kitchen atmosphere","https://www.pinterest.com/pin/2885187258475437/"],
  ["/inspiration/illuminated-wardrobe-reference.jpg","Wardrobe lighting","https://www.pinterest.com/pin/69946600458534159/"],
