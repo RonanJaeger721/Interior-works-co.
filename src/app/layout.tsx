@@ -1,0 +1,4 @@
+import type {Metadata} from "next";import {Cormorant_Garamond,Manrope} from "next/font/google";import "./globals.css";import {SiteShell} from "@/components/site-shell";import {RevealInit} from "@/components/reveal";
+const display=Cormorant_Garamond({subsets:["latin"],variable:"--display",weight:["500","600"]});const body=Manrope({subsets:["latin"],variable:"--body"});
+export const metadata:Metadata={title:{default:"Interior Works Co. | Custom Interiors Harare",template:"%s | Interior Works Co."},description:"Interior design, fitted furniture, TV units, kitchens, BIC cupboards and ceilings in Harare, Zimbabwe.",icons:{icon:"/brand/interior-works-logo.png"}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className={`${display.variable} ${body.variable}`}><RevealInit/><SiteShell>{children}</SiteShell></body></html>}

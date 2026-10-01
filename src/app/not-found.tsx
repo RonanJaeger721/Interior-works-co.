@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <section className="not-found"><small>404 · Room not found</small><h1>This space<br/><em>is still empty.</em></h1><Link className="button" href="/">Return home <b>↗</b></Link></section>}
